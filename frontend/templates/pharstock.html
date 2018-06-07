@@ -1,0 +1,115 @@
+<!--
+    药店
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>网上买药系统-组2-软件工程大作业</title>
+  <link rel="stylesheet" href="{% static 'css/mdui.min.css'%}"/>
+<script src="{% static 'js/mdui.min.js'%}"></script>
+<script src="{% static 'js/blqlib.js'%}"></script>
+</head>
+
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-appbar-with-tab-larger mdui-theme-primary-teal mdui-text-color-teal-300 " style="padding-top: 100px;">
+<!--所有边栏-->
+ <!--顶端工具栏-->
+  <div class="mdui-appbar mdui-appbar-fixed ">
+        <div class="mdui-toolbar mdui-color-teal-300 mdui-text-color-white-text">
+          <a id="toggle2" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+          <a href="/" class="mdui-typo-title ">网上买药系统</a>
+          <div class="mdui-toolbar-spacer"></div>
+          {% if request.user.is_authenticated %}
+          <a href="/logout" mdui-tooltip="{content: '登出'}"class="mdui-btn mdui-btn-icon">
+            {% else %}
+            <a href="/sign" mdui-tooltip="{content: '登陆/注册'}"class="mdui-btn mdui-btn-icon">
+            {% endif%}
+          <i class="mdui-icon material-icons">account_box</i></a>
+        </div>
+        <div class="mdui-tab mdui-color-teal-300 mdui-text-color-white-text" mdui-tab>
+            <a href="/pharindex"  class="mdui-ripple mdui-ripple-white  ">
+                主页
+              </a>
+              <a href="#tab2"  class="mdui-ripple mdui-ripple-white mdui-tab-active ">
+                库存管理
+              </a>
+              <a href="/pharorder"  class="mdui-ripple mdui-ripple-white ">
+                订单管理
+              </a>
+              <div class="mdui-toolbar-spacer"></div>
+         </div>
+        </div>
+  </div>
+ <!--所有工具结束-->
+<!--主容器-->
+{% if request.user.is_authenticated %}
+<div class="mdui-typo mdui-container" style="padding-top: 40px;padding-right: 100px;">
+    <div id="tab2">
+      <br>
+        <div class="mdui-typo-title">库存管理</div>
+        <span class='mdui-float-right'>
+            {% if stock.has_previous %}
+                <a href="?page={{ med.previous_page_number }}"><i class="mdui-icon material-icons">arrow_back</i></a>
+            {% endif %}
+    
+            <span class="">
+                {{ stock.number }} of {{ stock.paginator.num_pages }}
+            </span>
+    
+            {% if stock.has_next %}
+                <a href="?page={{ stock.next_page_number }}"><i class="mdui-icon material-icons">arrow_forward</i></a>
+            {% endif %}
+        </span>
+        <div class="mdui-row" style='padding-left:20px;padding-right:2em;'>
+            <div class="mdui-table-fluid ">
+              <table class="mdui-table">
+                  <thead>
+                      <tr>
+                        <th>药品名称</th>
+                        <th>一级分类</th> 
+                        <th>二级分类</th> 
+                         <th>数量</th> 
+                      </tr>
+                    </thead>
+                <tbody>
+                  {%  for a in stock %}
+                  <tr>
+                            <td><p class=" mdui-ripple mdui-typo mdui-typo-body-1-opacity mdui-text-color-teal-300  ">  {{a.ypmc}}</p></td>
+                            <td><p class=" mdui-typo mdui-typo-body-1-opacity mdui-text-color-teal-300  ">  {{a.c1_name}}</p></td>
+                            <td><p class=" mdui-typo mdui-typo-body-1-opacity mdui-text-color-teal-300  ">  {{a.c2_name}}</p></td>
+                            <td><p class=" mdui-typo mdui-typo-body-1-opacity mdui-text-color-teal-300  ">  {{a.quantity}}</p></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+           <br><br><br>
+               </div>
+            
+        </div>
+        <div class="mdui-typo"><hr/></div>
+           
+       
+      <br>
+      <br>
+      <br>
+</div>
+</div>
+  {% else %}
+  <div class="mdui-typo mdui-container" style="padding-top: 40px;padding-right: 100px;">
+      <div id="tab1">
+
+        
+       <a class=' mdui-text-color-teal-300' href="/sign">登陆/注册后使用药店管理功能，点击登陆。</a>
+        </div>
+  </div>
+  {% endif%}
+
+<!--主容器-->
+    
+      
+    
+</body>
+</html>

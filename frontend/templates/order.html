@@ -1,0 +1,289 @@
+<!--
+    软件工程大作业 前端框架
+    第一版
+    主界面
+    包兰清 4.24
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>网上买药系统-组2-软件工程大作业</title>
+  <link rel="stylesheet" href="{% static 'css/mdui.min.css'%}"/>
+<script src="{% static 'js/mdui.min.js'%}"></script>
+<script src="{% static 'js/blqlib.js'%}"></script>
+</head>
+
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-appbar-with-tab-larger mdui-theme-primary-teal mdui-text-color-teal-300 " style="padding-top: 100px;">
+<!--所有边栏-->
+  <!--工具左边栏-->            
+  <div class="mdui-drawer mdui-text-color-black-text" id="drawer2" style='width:calc(100% - 56px);max-width:250px; '>
+      <ul class="mdui-list" mdui-collapse="{accordion: true}">
+        
+              <!--登陆可见-->
+              {% if request.user.is_authenticated %}
+              <li class="mdui-list-item ">
+                <div class="mdui-list-item-content">你好！{{request.user}}</div>
+                </li>
+                <a href='/'class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">perm_device_information</i> 
+                    <div class="mdui-list-item-content">个人信息</div>
+                  </a>
+                <a class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">star</i>
+                <div class="mdui-list-item-content">收藏夹</div>
+                </a>
+                <a class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">send</i>
+                <div class="mdui-list-item-content">订单一览</div>
+                </a>
+               
+           <li id='toggle' class="mdui-list-item mdui-ripple">
+              <i class="mdui-list-item-icon mdui-icon material-icons">local_hospital</i>
+             <div class="mdui-list-item-content">购物车</div>
+             </li>
+               {% else %}
+               <a href='/sign' class="mdui-list-item mdui-ripple">
+                  <div class="mdui-list-item-content">你好！点击这里登陆/注册</div>
+               </a>
+               <a href="/category"  class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">book</i>
+              <div class="mdui-list-item-content">疾病分类</div>
+              </a>
+              <a href='/bestselling' class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">book</i>
+              <div class="mdui-list-item-content">药品热销</div>
+              </a>
+              <li id='leftsearch'class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">local_hospital</i>
+               <div class="mdui-list-item-content">搜索</div>
+              </li>
+             <a href='/' class="mdui-list-item mdui-ripple">
+              <i class="mdui-list-item-icon mdui-icon material-icons">local_hospital</i>
+             <div class="mdui-list-item-content">复杂搜索</div>
+           </a>
+           <li id='toggle' class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">local_hospital</i>
+           <div class="mdui-list-item-content">购物车</div>
+           </li>
+            {% endif %}
+            
+              <!--登陆可见-->
+            {% if request.user.is_authenticated %}
+          <li class="mdui-collapse-item mdui-collapse-item-close">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+              <i class="mdui-list-item-icon mdui-icon material-icons">people</i>
+              <div class="mdui-list-item-content">功能索引</div>
+              <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a href="/category"  class="mdui-list-item mdui-ripple">
+                  <i class="mdui-list-item-icon mdui-icon material-icons">book</i>
+                <div class="mdui-list-item-content">疾病分类</div>
+                </a>
+                <a href='/bestselling' class="mdui-list-item mdui-ripple">
+                  <i class="mdui-list-item-icon mdui-icon material-icons">book</i>
+                <div class="mdui-list-item-content">药品热销</div>
+                </a>
+                <li id='leftsearch'class="mdui-list-item mdui-ripple">
+                  <i class="mdui-list-item-icon mdui-icon material-icons">local_hospital</i>
+                 <div class="mdui-list-item-content">搜索</div>
+                </li>
+               <a href='/comsearch' class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">local_hospital</i>
+               <div class="mdui-list-item-content">复杂搜索</div>
+             </a>
+             <li id='toggle' class="mdui-list-item mdui-ripple">
+              <i class="mdui-list-item-icon mdui-icon material-icons">local_hospital</i>
+             <div class="mdui-list-item-content">购物车</div>
+             </li>
+                
+            </ul>
+          </li>
+              <a href='/logout' class="mdui-list-item mdui-ripple">
+                   <i class="mdui-list-item-icon mdui-icon material-icons">live_help</i>
+                  <div class="mdui-list-item-content">登出</div>
+                </a>
+                {% else%}
+                <a href='/sign 'class="mdui-list-item mdui-ripple">
+                  <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+                  <div class="mdui-list-item-content">管理员或卖家？</div>
+                  </a>
+                {% endif %}
+
+        </ul>   
+  </div>
+<!--购物车边栏-->            
+<div class="mdui-drawer mdui-drawer-right mdui-drawer-close"  style='width:calc(100% - 56px);max-width:350px; ' id="drawer">
+    <ul class="mdui-list" id='cart'>
+    {% for i in request.session.cart.items %}
+    <br>
+    <li class="mdui-list-item mdui-ripple">
+        <div class="mdui-list-item-avatar"><img src="{% static "img/attachment/" %}{{i.yptp}}"/></div>
+        <div class="mdui-list-item-content">{{i.ypmc}}  x {{i.quantity}}</div>
+        <div class="mdui-list-item-icon"> {{i.price}}
+          <span>
+              <i class="mdui-icon material-icons" onclick="deletecart({{i.mid}},{{i.pid}});" >delete_forever</i>
+                </span><br>{{i.pname}}</div>
+      </li>
+    {% endfor %}
+    <li class='mdui-list-item mdui-ripple'>合计：{{request.session.cart.total_price}}</li>
+                </ul>
+    <a href='/cart' class="mdui-btn  mdui-color-teal-300 mdui-text-color-white-text"  />查看购物车</a>
+    
+</div>
+<!--搜索边栏-->            
+<div class="mdui-drawer mdui-drawer-right mdui-drawer-close" style='width:calc(100% - 56px);max-width:350px; 'id="drawer3">
+    <div class='biubiubiu'style='padding:10%'>
+      <div class='mdui-row'>
+          <div class='mdui-col-xs-9 mdui-col-sm-9'>
+          <div class="mdui-textfield mdui-textfield-floating-label">
+           
+                  <label class="mdui-textfield-label">键入疾病/药品关键词</label>
+                  <input class="mdui-textfield-input" id="txt1" type="text" onkeyup="showHint(this.value)" />
+          
+                </div>
+          </div>
+      </div>
+      <div class='mdui-row'>
+         <div class='mdui-float-right'>
+            <a href="javascript:void(0);" > <i onclick="search()" class="mdui-icon material-icons">search</i></a>
+          </div>
+      </div>
+      <p class='mdui-typo-caption'>为你推荐... <br><br><span id="txtHint"></span></p>
+  
+    </div>  
+    </div>
+  <!--边栏结束-->    
+ <!--顶端工具栏-->
+  <div class="mdui-appbar mdui-appbar-fixed ">
+        <div class="mdui-toolbar mdui-color-teal-300 mdui-text-color-white-text">
+          <a id="toggle2" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+          <a href="/" class="mdui-typo-title ">网上买药系统</a>
+          <div class="mdui-toolbar-spacer"></div>
+          <a href="javascript:;"id='toggle3'mdui-tooltip="{content: '搜索'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+          {% if request.user.is_authenticated %}
+          <a href="/logout" mdui-tooltip="{content: '登出'}"class="mdui-btn mdui-btn-icon">
+            {% else %}
+            <a href="/sign" mdui-tooltip="{content: '登陆/注册'}"class="mdui-btn mdui-btn-icon">
+            {% endif%}
+          <i class="mdui-icon material-icons">account_box</i></a>
+          <a href="javascript:;" id='toggle4'mdui-tooltip="{content: '购物车'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">add_shopping_cart</i></a>
+        </div>
+        <div class="mdui-tab mdui-color-teal-300 mdui-text-color-white-text" mdui-tab>
+            <a href="/"  class="mdui-ripple mdui-ripple-white">
+                主页
+              </a>
+              <a href="#tab2"  class="mdui-ripple mdui-ripple-white mdui-tab-active">
+                订单创建
+              </a>
+              <div class="mdui-toolbar-spacer"></div>
+         </div>
+        </div>
+  </div>
+ <!--所有工具结束-->
+<!--主容器-->
+{% if request.user.is_authenticated %}
+<div class="mdui-typo mdui-container" style="padding-top: 40px;padding-right: 100px;">
+    <div id="tab2">
+      <br>
+        <div class="mdui-typo-title">结算</div>
+        <br>
+        <div class="mdui-row" style='padding-left:20px;padding-right:50px;'>
+            <div class="mdui-table-fluid ">
+              <table class="mdui-table">
+                  <thead>
+                      <tr>
+                        <th>{{pname}}</th>
+                        <th></th>   <th></th> 
+                      </tr>
+                    </thead>
+                <tbody>
+                    {%  for a in list %}
+                  <tr>
+                            <td><p class=" mdui-ripple mdui-typo mdui-typo-body-1-opacity mdui-text-color-teal-300  ">  {{a.ypmc}}</p></td>
+                            <td><p class=" mdui-typo mdui-typo-body-1-opacity mdui-text-color-teal-300  ">  {{a.price}}</p></td>
+                            <td><p class="  mdui-typo mdui-typo-body-1-opacity mdui-text-color-teal-300  ">  {{a.quantity}}</p></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tr>
+                  <th>总价：<th></th><th>{{total}}</th>
+                  
+                </tr>
+              </table>
+           
+               </div>
+            
+        </div>
+        <div class="mdui-typo"><hr/></div>
+           
+        <div class="mdui-typo-title">填写个人信息</div>
+        <br>
+        <div class="mdui-row" style="padding:2em;">
+        <form class="order-form" method='post'>{% csrf_token %}
+          
+        <div class="mdui-col-sm-6 ">
+          <div class="mdui-textfield mdui-textfield-floating-label ">
+            <label class="mdui-textfield-label">地址</label>
+            <input name='address' class="mdui-textfield-input" type="text"/>
+          </div>
+          <br>
+          <div class="mdui-textfield mdui-textfield-floating-label ">
+              <label class="mdui-textfield-label">联系方式</label>
+              <input name='tel' class="mdui-textfield-input" type="number"/>
+            </div>
+        </div>
+      </div>
+      
+      <br>
+      <div class="mdui-row" style="padding:2em;">
+            <input type='submit' value='提交订单' class="mdui-btn-block mdui-btn mdui-color-teal-300 mdui-text-color-white">
+          </form>
+        </div>
+        
+      <br>
+      <br>
+</div>
+  {% else %}
+  <div class="mdui-typo mdui-container" style="padding-top: 40px;padding-right: 100px;">
+      <div id="tab2">
+
+        
+       <a class=' mdui-text-color-teal-300' href="/sign">登陆/注册后使用购物车/结算功能，点击登陆。</a>
+        </div>
+  </div>
+  {% endif%}
+
+<!--主容器-->
+    
+      
+    
+</body>
+</html>
+
+<!--drawer 拖动函数 购物车3 搜索1-->
+<script>
+var inst = new mdui.Drawer('#drawer');
+var inst2 = new mdui.Drawer('#drawer2');
+var inst3 = new mdui.Drawer('#drawer3');
+document.getElementById('toggle4').addEventListener('click', function () {
+  inst3.close(); inst.toggle();
+});
+document.getElementById('toggle').addEventListener('click', function () {
+  inst3.close();inst.toggle();
+}); 
+document.getElementById('toggle2').addEventListener('click', function () {
+  inst2.toggle();
+});
+document.getElementById('leftsearch').addEventListener('click', function () {
+  inst.close();inst3.toggle();
+});
+document.getElementById('toggle3').addEventListener('click', function () {
+  inst.close();inst3.toggle();
+});
+</script>
+<!--drawer 拖动函数-->

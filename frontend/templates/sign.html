@@ -1,0 +1,73 @@
+<!--
+    注册/登陆
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>网上买药系统-组2-软件工程大作业</title>
+  <link rel="stylesheet" href="{% static 'css/mdui.min.css'%}"/>
+  <script src="{% static 'js/mdui.min.js'%}"></script>
+</head>
+
+
+<body class="mdui-typo mdui-drawer-body-left mdui-appbar-with-toolbar mdui-appbar-with-tab-larger mdui-text-color-teal-300 " style="padding-top: 100px;">
+ 
+<!--主容器-->
+<div class="mdui-container mdui-center mdui-typo " style="padding-top: 40px;padding-right: 100px;">
+          <!--头部信息-->
+          <div class="mdui-row" style='padding-right:25%'>
+        <h1 class="mdui-typo-display-2">网上买药系统</h1>
+        <a href='/' class="mdui-btn mdui-color-teal-300 mdui-text-color-white">返回首页</a>
+        <div class="mdui-typo">
+            <hr/>
+          </div>
+        </div>
+    <div class="mdui-row mdui-typo">
+      <!--药品推荐-->
+            <div class=" mdui-col-xs-4 mdui-col-sm-4 ">
+                <div class="mdui-typo-title">已有账户？在这里登陆</div>
+                <form class="login-form" method='post'>{% csrf_token %}
+                <div class="mdui-textfield mdui-textfield-floating-label ">
+                    <label class="mdui-textfield-label">账户ID</label>
+                    <input name='username' class="mdui-textfield-input" type="text"/>
+                  </div>
+                  <div class="mdui-textfield mdui-textfield-floating-label ">
+                      <label class="mdui-textfield-label">密码</label>
+                      <input name='password' class="mdui-textfield-input" type="password"/>
+                    </div>
+                    <br>
+                    <input type='submit' value='登陆' class="mdui-float-right mdui-btn mdui-color-teal-300 mdui-text-color-white">
+                  </form>
+                   
+            </div>
+            <div class=" mdui-col-xs-1 mdui-col-sm-1 ">
+            </div>
+              <div class="mdui-col-xs-4 mdui-col-sm-4  ">
+                
+                  <div class="mdui-typo-title">注册新账户</div>
+                  <div class="mdui-textfield mdui-textfield-floating-label ">
+                      <label class="mdui-textfield-label">账户ID</label>
+                      <input class="mdui-textfield-input" type="TEXT"/>
+                    </div>
+                    <div class="mdui-textfield mdui-textfield-floating-label ">
+                        <label class="mdui-textfield-label">密码</label>
+                        <input class="mdui-textfield-input" type="password"/>
+                    </div>
+                    <br>
+                    <a href='/signup' class=" mdui-float-right mdui-btn  mdui-color-teal-300 mdui-text-color-white">用户注册</a>
+              </div>
+       
+      </div>
+    </div>
+  </div>
+<!--主容器-->
+    
+      
+    
+</body>
+</html>
+
+
